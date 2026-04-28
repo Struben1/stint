@@ -1,0 +1,1946 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STINT – Real DIY, No Fluff</title>
+  <meta name="description" content="Fix it fast. No fluff. No fake perfection. Just real DIY.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500&display=swap" rel="stylesheet">
+
+  <!-- Schema.org HowTo JSON-LD (for article pages) -->
+  <script type="application/ld+json" id="schema-howto">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Unclog a Sink – No Chemicals",
+    "description": "How to unclog a sink without chemical drain cleaners",
+    "totalTime": "PT10M",
+    "estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": "4" },
+    "tool": ["Cup-style plunger", "Zip-it tool", "Bucket", "Old towel"],
+    "step": [
+      { "@type": "HowToStep", "name": "Clear and prep", "text": "Clear under-sink area, place bucket" },
+      { "@type": "HowToStep", "name": "Remove stopper", "text": "Remove drain stopper" },
+      { "@type": "HowToStep", "name": "Zip-it tool", "text": "Run zip-it tool down and back up 3 times" },
+      { "@type": "HowToStep", "name": "Boiling water flush", "text": "Pour boiling water flush down drain" },
+      { "@type": "HowToStep", "name": "Plunge if needed", "text": "If still clogged, plunge with wet towel seal" }
+    ]
+  }
+  </script>
+
+  <!-- Google Analytics placeholder -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','UA-XXXXX');</script>
+
+  <style>
+    /* ─── CSS VARIABLES ─────────────────────────────────────────── */
+    :root {
+      --bg:          #FBFBF9;
+      --bg-2:        #F3F2EE;
+      --text:        #1C1C1A;
+      --text-2:      #5E5E5A;
+      --accent:      #D95A2B;
+      --accent-h:    #B3411A;
+      --border:      #E6E4DF;
+      --warn-bg:     #FEF0EF;
+      --warn-border: #D95A2B;
+      --card-bg:     #FFFFFF;
+      --nav-bg:      #FBFBF9;
+      --shadow:      0 2px 12px rgba(28,28,26,0.07);
+      --shadow-lg:   0 8px 32px rgba(28,28,26,0.12);
+      --radius:      10px;
+      --max-w:       1200px;
+      --content-w:   720px;
+      --sidebar-w:   280px;
+      --transition:  0.18s ease;
+    }
+    [data-theme="dark"] {
+      --bg:       #121212;
+      --bg-2:     #1E1E1C;
+      --text:     #EEEEEE;
+      --text-2:   #999997;
+      --border:   #2C2C2A;
+      --card-bg:  #1A1A18;
+      --nav-bg:   #121212;
+      --warn-bg:  #2A1510;
+      --shadow:   0 2px 12px rgba(0,0,0,0.3);
+      --shadow-lg:0 8px 32px rgba(0,0,0,0.4);
+    }
+
+    /* ─── RESET & BASE ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Satoshi', 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background var(--transition), color var(--transition);
+      min-height: 100vh;
+    }
+    a { color: var(--accent); text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--accent-h); }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* ─── TYPOGRAPHY ────────────────────────────────────────────── */
+    h1,h2,h3,h4 { font-family: 'Space Grotesk', sans-serif; }
+    h1 { font-size: 2.5rem; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
+    h2 { font-size: 1.75rem; font-weight: 500; line-height: 1.3; margin-top: 2rem; }
+    h3 { font-size: 1.35rem; font-weight: 500; line-height: 1.4; }
+    p  { font-size: 1rem; line-height: 1.6; color: var(--text); margin-bottom: 1rem; }
+    .meta, .badge, small { font-size: 0.85rem; letter-spacing: 0.02em; color: var(--text-2); }
+
+    /* ─── LAYOUT UTILS ──────────────────────────────────────────── */
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+    .section    { margin-bottom: 64px; }
+    .sr-only    { position: absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+
+    /* ─── NAVIGATION ────────────────────────────────────────────── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: background var(--transition);
+    }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--text);
+      letter-spacing: -0.03em;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      flex: 1;
+      justify-content: center;
+    }
+    .nav-links a {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--text-2);
+      padding: 6px 14px;
+      border-radius: 6px;
+      transition: all var(--transition);
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--text);
+      background: var(--bg-2);
+    }
+    .nav-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .nav-btn {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-2);
+      transition: all var(--transition);
+      background: transparent;
+      border: 1px solid transparent;
+    }
+    .nav-btn:hover { color: var(--text); background: var(--bg-2); border-color: var(--border); }
+    .nav-btn svg { width: 18px; height: 18px; }
+
+    /* Hamburger */
+    .hamburger { display: none; }
+    .nav-drawer {
+      position: fixed; top: 0; right: 0; bottom: 0;
+      width: 280px; background: var(--bg);
+      border-left: 1px solid var(--border);
+      transform: translateX(100%);
+      transition: transform 0.25s cubic-bezier(.4,0,.2,1);
+      z-index: 200;
+      padding: 80px 24px 24px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .nav-drawer.open { transform: translateX(0); }
+    .nav-drawer a {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 500;
+      font-size: 1.1rem;
+      color: var(--text);
+      padding: 12px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background var(--transition);
+    }
+    .nav-drawer a:hover { background: var(--bg-2); }
+    .drawer-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+      z-index: 199; display: none;
+    }
+    .drawer-overlay.open { display: block; }
+    .drawer-close {
+      position: absolute; top: 20px; right: 20px;
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: var(--bg-2);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text);
+    }
+
+    /* Search overlay */
+    .search-overlay {
+      position: fixed; inset: 0;
+      background: rgba(18,18,18,0.7);
+      backdrop-filter: blur(8px);
+      z-index: 300;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 120px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .search-overlay.open { opacity: 1; pointer-events: all; }
+    .search-box {
+      background: var(--bg);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+    }
+    .search-input-wrap {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .search-input-wrap svg { color: var(--text-2); flex-shrink: 0; }
+    .search-input-wrap input {
+      flex: 1;
+      font-family: 'Satoshi','Inter',sans-serif;
+      font-size: 1rem;
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--text);
+    }
+    .search-input-wrap input::placeholder { color: var(--text-2); }
+    .search-hints {
+      padding: 12px 20px;
+      display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .search-hint {
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--bg-2);
+      color: var(--text-2);
+      cursor: pointer;
+      transition: all var(--transition);
+      border: 1px solid var(--border);
+    }
+    .search-hint:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    /* ─── PAGES ─────────────────────────────────────────────────── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ─── HERO ──────────────────────────────────────────────────── */
+    .hero {
+      padding: 80px 0 64px;
+      text-align: center;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(217,90,43,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(217,90,43,0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--text-2);
+      max-width: 480px;
+      margin: 0 auto 36px;
+    }
+    .hero-search {
+      max-width: 520px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .hero-search input {
+      width: 100%;
+      padding: 16px 56px 16px 20px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      background: var(--card-bg);
+      font-family: 'Satoshi','Inter',sans-serif;
+      font-size: 1rem;
+      color: var(--text);
+      outline: none;
+      box-shadow: var(--shadow);
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .hero-search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(217,90,43,0.12);
+    }
+    .hero-search input::placeholder { color: var(--text-2); }
+    .hero-search-btn {
+      position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition);
+    }
+    .hero-search-btn:hover { background: var(--accent-h); }
+    .hero-search-btn svg { width: 18px; height: 18px; }
+
+    /* ─── CATEGORY CHIPS ────────────────────────────────────────── */
+    .chips-row {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+    }
+    .chips-row::-webkit-scrollbar { display: none; }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 100px;
+      border: 1.5px solid var(--border);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 500;
+      font-size: 0.875rem;
+      color: var(--text-2);
+      background: var(--card-bg);
+      white-space: nowrap;
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+    .chip:hover, .chip.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .chip .chip-icon { font-size: 1rem; }
+
+    /* ─── SECTION HEADERS ───────────────────────────────────────── */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-header h2 { margin-top: 0; }
+    .section-header a {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    /* ─── ARTICLE CARDS ─────────────────────────────────────────── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+    .card-img {
+      width: 100%; height: 190px;
+      object-fit: cover;
+      background: linear-gradient(135deg, var(--bg-2) 0%, var(--border) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+    .card-img-placeholder {
+      width: 100%; height: 190px;
+      background: linear-gradient(135deg, var(--bg-2) 0%, var(--border) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+      flex-shrink: 0;
+    }
+    .card-body { padding: 16px; }
+    .card-badges {
+      display: flex; gap: 6px; flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+    .badge-time { background: rgba(94,94,90,0.1); color: var(--text-2); }
+    .badge-cost { background: rgba(217,90,43,0.1); color: var(--accent); }
+    .badge-skill { background: rgba(34,197,94,0.1); color: #16a34a; }
+    [data-theme="dark"] .badge-skill { color: #4ade80; }
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .card p { font-size: 0.875rem; color: var(--text-2); margin: 0; }
+
+    /* ─── TOOL OF WEEK ──────────────────────────────────────────── */
+    .tool-callout {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px;
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .tool-callout::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(217,90,43,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .tool-emoji {
+      font-size: 4rem;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(217,90,43,0.1), rgba(217,90,43,0.05));
+      border-radius: 16px;
+      width: 100px; height: 100px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(217,90,43,0.2);
+    }
+    .tool-content { flex: 1; }
+    .tool-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .tool-content h3 { font-size: 1.4rem; margin-bottom: 10px; }
+    .tool-content p { color: var(--text-2); margin-bottom: 16px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all var(--transition);
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--accent-h); color: #fff; }
+    .btn-outline {
+      border: 1.5px solid var(--border);
+      color: var(--text);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ─── INSTAGRAM ROW ─────────────────────────────────────────── */
+    .insta-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    .insta-item {
+      aspect-ratio: 1;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--bg-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, opacity 0.2s;
+      position: relative;
+    }
+    .insta-item:hover { transform: scale(0.97); opacity: 0.85; }
+    .insta-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.35);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.2s;
+      color: #fff; font-size: 1.3rem;
+    }
+    .insta-item:hover .insta-overlay { opacity: 1; }
+
+    /* ─── FOOTER ────────────────────────────────────────────────── */
+    .footer {
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      padding: 56px 0 32px;
+    }
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+    .footer-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--text);
+      margin-bottom: 10px;
+      display: block;
+    }
+    .footer-logo span { color: var(--accent); }
+    .footer-tagline { font-size: 0.875rem; color: var(--text-2); }
+    .footer-col h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-2);
+      margin-bottom: 14px;
+    }
+    .footer-col ul { display: flex; flex-direction: column; gap: 8px; }
+    .footer-col ul a {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .footer-col ul a:hover { color: var(--accent); }
+    .email-form { display: flex; flex-direction: column; gap: 10px; }
+    .email-form p { font-size: 0.875rem; color: var(--text-2); margin-bottom: 4px; }
+    .email-input-row { display: flex; gap: 8px; }
+    .email-input-row input {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      background: var(--bg);
+      font-family: inherit;
+      font-size: 0.875rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color var(--transition);
+    }
+    .email-input-row input:focus { border-color: var(--accent); }
+    .email-input-row input::placeholder { color: var(--text-2); }
+    .email-input-row button {
+      padding: 10px 16px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: background var(--transition);
+    }
+    .email-input-row button:hover { background: var(--accent-h); }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--text-2);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom a { color: var(--text-2); }
+    .footer-bottom a:hover { color: var(--accent); }
+
+    /* ─── ARTICLE PAGE ──────────────────────────────────────────── */
+    .article-layout {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 180px var(--content-w) var(--sidebar-w);
+      gap: 40px;
+      align-items: start;
+      padding-top: 48px;
+    }
+
+    /* TOC */
+    .toc {
+      position: sticky;
+      top: 80px;
+    }
+    .toc-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-2);
+      margin-bottom: 12px;
+    }
+    .toc ul { display: flex; flex-direction: column; gap: 4px; }
+    .toc ul a {
+      font-size: 0.82rem;
+      color: var(--text-2);
+      text-decoration: none;
+      padding: 4px 0;
+      border-left: 2px solid transparent;
+      padding-left: 10px;
+      display: block;
+      transition: all var(--transition);
+      line-height: 1.4;
+    }
+    .toc ul a:hover, .toc ul a.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+    }
+
+    /* Article content */
+    .article-content { min-width: 0; }
+    .article-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.875rem;
+      color: var(--text-2);
+      margin-bottom: 24px;
+      transition: color var(--transition);
+      cursor: pointer;
+    }
+    .article-back:hover { color: var(--accent); }
+    .article-badges {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .article-content h1 { margin-bottom: 8px; }
+    .article-meta {
+      font-size: 0.85rem;
+      color: var(--text-2);
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .article-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); }
+
+    /* Article image */
+    .article-hero-img {
+      width: 100%;
+      height: 320px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #e8e4dc, #d4cfc5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      margin-bottom: 36px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    /* Tools & materials */
+    .tools-materials {
+      background: var(--bg-2);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 36px;
+      border: 1px solid var(--border);
+    }
+    .tools-materials h3 { margin-bottom: 16px; color: var(--text); }
+    .tools-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .tool-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--text-2);
+    }
+    .tool-check {
+      width: 18px; height: 18px;
+      border-radius: 4px;
+      border: 1.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: all var(--transition);
+      background: var(--bg);
+    }
+    .tool-check.checked {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .tool-check.checked::after {
+      content: '✓';
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+    }
+    .tool-item.checked-item span { text-decoration: line-through; opacity: 0.5; }
+
+    /* Steps */
+    .step { margin-bottom: 32px; scroll-margin-top: 80px; }
+    .step-number-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .step-num {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .step h3 { font-size: 1.15rem; font-weight: 700; }
+
+    /* Warning callout */
+    .warning-box {
+      background: var(--warn-bg);
+      border: 2px solid var(--warn-border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 24px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .warning-box .warn-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+    .warning-box strong { color: var(--accent); }
+    .warning-box p { margin: 0; font-size: 0.9rem; }
+
+    /* Common mistakes */
+    .mistakes-box {
+      background: var(--bg-2);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 24px 0;
+      border: 1px solid var(--border);
+    }
+    .mistakes-box h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-2);
+      margin-bottom: 12px;
+    }
+    .mistakes-box ul { display: flex; flex-direction: column; gap: 8px; }
+    .mistakes-box li {
+      display: flex;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: var(--text-2);
+      align-items: flex-start;
+    }
+    .mistakes-box li::before {
+      content: '→';
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* Cost calculator */
+    .calculator {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 32px 0;
+    }
+    .calculator h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1rem;
+    }
+    .calc-row { margin-bottom: 16px; }
+    .calc-row label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      color: var(--text-2);
+      margin-bottom: 6px;
+    }
+    .calc-row label span { font-weight: 600; color: var(--text); }
+    .calc-row input[type=range] {
+      width: 100%;
+      accent-color: var(--accent);
+    }
+    .calc-result {
+      background: rgba(217,90,43,0.08);
+      border-radius: 8px;
+      padding: 12px 16px;
+      text-align: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--accent);
+      margin-top: 12px;
+    }
+    .calc-result small { font-size: 0.75rem; font-weight: 400; color: var(--text-2); display: block; }
+
+    /* Video placeholder */
+    .video-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--bg-2);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      color: var(--text-2);
+      margin: 20px 0;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .video-placeholder:hover { background: var(--border); }
+    .video-play {
+      width: 52px; height: 52px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .video-play svg { fill: #fff; margin-left: 4px; }
+
+    /* Print button */
+    .print-btn {
+      position: absolute;
+      top: 0; right: 0;
+    }
+
+    /* Related posts */
+    .related-posts { margin-top: 48px; }
+    .related-posts h2 { font-size: 1.25rem; margin-bottom: 20px; margin-top: 0; }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    /* Article sidebar */
+    .article-sidebar { position: sticky; top: 80px; }
+    .sidebar-widget {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .sidebar-widget h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-2);
+      margin-bottom: 14px;
+    }
+    .sidebar-ad {
+      background: var(--bg-2);
+      border-radius: 8px;
+      height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: var(--text-2);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border: 1px dashed var(--border);
+    }
+    .progress-bar {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin-bottom: 6px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width 0.3s;
+    }
+
+    /* ─── SIMPLE PAGES ──────────────────────────────────────────── */
+    .simple-page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+    .simple-page h1 { margin-bottom: 8px; }
+    .simple-page .page-meta {
+      color: var(--text-2);
+      font-size: 0.875rem;
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .simple-page h2 { font-size: 1.3rem; margin-bottom: 12px; }
+    .simple-page p { color: var(--text-2); }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 0.875rem; font-weight: 500; color: var(--text); }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      background: var(--card-bg);
+      font-family: 'Satoshi','Inter',sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color var(--transition);
+      resize: vertical;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+    .about-face {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--bg-2), var(--border));
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      border: 3px solid var(--border);
+    }
+    .safety-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .safety-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+    .safety-card h3 { font-size: 1rem; margin-bottom: 4px; }
+    .safety-card p { font-size: 0.875rem; color: var(--text-2); margin: 0; }
+
+    /* ─── AD UNIT ───────────────────────────────────────────────── */
+    .ad-in-content {
+      background: var(--bg-2);
+      border-radius: 8px;
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      color: var(--text-2);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1px dashed var(--border);
+      margin: 32px 0;
+    }
+
+    /* ─── DIVIDER ───────────────────────────────────────────────── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+    /* ─── TOAST ─────────────────────────────────────────────────── */
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+      background: var(--text); color: var(--bg);
+      padding: 12px 20px; border-radius: 8px;
+      font-size: 0.875rem; font-weight: 500;
+      z-index: 999; transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+      pointer-events: none;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ─── READING PROGRESS ──────────────────────────────────────── */
+    .reading-progress {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 101;
+      height: 3px; background: transparent;
+    }
+    .reading-progress-bar {
+      height: 100%; background: var(--accent);
+      width: 0%; transition: width 0.1s linear;
+    }
+
+    /* ─── ANIMATIONS ────────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeUp 0.5s ease both; }
+    .fade-in-1 { animation-delay: 0.05s; }
+    .fade-in-2 { animation-delay: 0.12s; }
+    .fade-in-3 { animation-delay: 0.2s; }
+    .fade-in-4 { animation-delay: 0.28s; }
+
+    /* ─── RESPONSIVE ────────────────────────────────────────────── */
+    @media (max-width: 1100px) {
+      .article-layout {
+        grid-template-columns: 160px 1fr;
+      }
+      .article-sidebar { display: none; }
+    }
+    @media (max-width: 900px) {
+      .cards-grid { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .insta-row { grid-template-columns: repeat(4, 1fr); }
+      .tools-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.4rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .tool-callout { flex-direction: column; text-align: center; }
+      .insta-row { grid-template-columns: repeat(3, 1fr); }
+      .footer-top { grid-template-columns: 1fr; gap: 28px; }
+      .article-layout {
+        grid-template-columns: 1fr;
+        padding-top: 24px;
+      }
+      .toc { display: none; }
+      .article-sidebar { display: none; }
+      .related-grid { grid-template-columns: 1fr; }
+      .hero { padding: 48px 0 40px; }
+    }
+    @media (max-width: 480px) {
+      .insta-row { grid-template-columns: repeat(2, 1fr); }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ─── PRINT STYLES ──────────────────────────────────────────── */
+    @media print {
+      .nav, .toc, .article-sidebar, .ad-in-content, .sidebar-ad,
+      .related-posts, .footer, .reading-progress, .print-btn,
+      .hero-search, .video-placeholder { display: none !important; }
+      body { background: #fff; color: #000; }
+      .article-layout { grid-template-columns: 1fr; }
+      .article-content { max-width: 100%; }
+      a { color: #000; }
+      .warning-box { border: 2px solid #000; background: #f8f8f8; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Reading Progress -->
+<div class="reading-progress" id="readingProgress">
+  <div class="reading-progress-bar" id="readingBar"></div>
+</div>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#" onclick="navigate('home')">ST<span>I</span>NT</a>
+    <div class="nav-links">
+      <a href="#" onclick="navigate('home')">Projects</a>
+      <a href="#" onclick="navigate('home')">Repairs</a>
+      <a href="#" onclick="navigate('home')">Tools</a>
+      <a href="#" onclick="navigate('home')">Rooms</a>
+      <a href="#" onclick="navigate('home')">Guides</a>
+    </div>
+    <div class="nav-actions">
+      <button class="nav-btn" onclick="openSearch()" title="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+      </button>
+      <button class="nav-btn" onclick="toggleDark()" id="themeBtn" title="Toggle dark mode">
+        <svg id="sunIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg id="moonIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+      <button class="nav-btn hamburger" onclick="openDrawer()" title="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Drawer -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="nav-drawer" id="navDrawer">
+  <button class="drawer-close" onclick="closeDrawer()">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+  <a href="#" onclick="navigate('home');closeDrawer()">Projects</a>
+  <a href="#" onclick="navigate('home');closeDrawer()">Repairs</a>
+  <a href="#" onclick="navigate('home');closeDrawer()">Tools</a>
+  <a href="#" onclick="navigate('home');closeDrawer()">Rooms</a>
+  <a href="#" onclick="navigate('home');closeDrawer()">Guides</a>
+  <hr style="border-color:var(--border);margin:8px 0">
+  <a href="#" onclick="navigate('about');closeDrawer()">About</a>
+  <a href="#" onclick="navigate('contact');closeDrawer()">Contact</a>
+  <a href="#" onclick="navigate('safety');closeDrawer()">Safety</a>
+</div>
+
+<!-- Search Overlay -->
+<div class="search-overlay" id="searchOverlay" onclick="closeSearch(event)">
+  <div class="search-box" onclick="event.stopPropagation()">
+    <div class="search-input-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="text" placeholder="Search repairs, tools, projects…" id="searchInput" onkeydown="handleSearch(event)">
+    </div>
+    <div class="search-hints">
+      <span class="search-hint" onclick="navigate('article')">Unclog a sink</span>
+      <span class="search-hint">Fix squeaky floor</span>
+      <span class="search-hint">Paint a room</span>
+      <span class="search-hint">Replace outlet</span>
+      <span class="search-hint">Patch drywall</span>
+      <span class="search-hint">Grouting tile</span>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- ═══════════════════ HOME PAGE ════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-eyebrow fade-in">🔧 No sponsor deals. No affiliate fluff.</div>
+      <h1 class="fade-in fade-in-1">Fix it. <em>Fast.</em></h1>
+      <p class="hero-sub fade-in fade-in-2">No fluff. No fake perfection. Just real DIY that works in your actual house.</p>
+      <div class="hero-search fade-in fade-in-3">
+        <input type="text" placeholder="What are you trying to fix?" id="heroSearchInput">
+        <button class="hero-search-btn" onclick="openSearch()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <!-- Category Chips -->
+    <div class="section fade-in fade-in-4">
+      <div class="chips-row">
+        <div class="chip active" onclick="toggleChip(this)"><span class="chip-icon">🌱</span> Beginner</div>
+        <div class="chip" onclick="toggleChip(this)"><span class="chip-icon">💵</span> Under $20</div>
+        <div class="chip" onclick="toggleChip(this)"><span class="chip-icon">⏱️</span> Under 30 min</div>
+        <div class="chip" onclick="toggleChip(this)"><span class="chip-icon">📅</span> Weekend project</div>
+        <div class="chip" onclick="toggleChip(this)"><span class="chip-icon">🚿</span> Bathroom</div>
+        <div class="chip" onclick="toggleChip(this)"><span class="chip-icon">🍳</span> Kitchen</div>
+        <div class="chip" onclick="toggleChip(this)"><span class="chip-icon">🏡</span> Exterior</div>
+        <div class="chip" onclick="toggleChip(this)"><span class="chip-icon">🪟</span> Windows</div>
+        <div class="chip" onclick="toggleChip(this)"><span class="chip-icon">⚡</span> Electrical</div>
+      </div>
+    </div>
+
+    <!-- Featured Projects -->
+    <section class="section">
+      <div class="section-header">
+        <h2>Latest Projects</h2>
+        <a href="#">View all →</a>
+      </div>
+      <div class="cards-grid">
+        <!-- Card 1 -->
+        <div class="card" onclick="navigate('article')">
+          <div class="card-img-placeholder">🚰</div>
+          <div class="card-body">
+            <div class="card-badges">
+              <span class="badge badge-time">⏱️ 10 min</span>
+              <span class="badge badge-cost">💰 $4</span>
+              <span class="badge badge-skill">🌱 Beginner</span>
+            </div>
+            <h3>Unclog a Sink – No Chemicals</h3>
+            <p>Your drain is slow and you're out of patience. Here's what actually works.</p>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="card" onclick="showToast('Coming soon!')">
+          <div class="card-img-placeholder">🪟</div>
+          <div class="card-body">
+            <div class="card-badges">
+              <span class="badge badge-time">⏱️ 45 min</span>
+              <span class="badge badge-cost">💰 $8</span>
+              <span class="badge badge-skill">🌱 Beginner</span>
+            </div>
+            <h3>Re-caulk a Drafty Window in One Afternoon</h3>
+            <p>Stops the cold, saves money, and takes less time than you think.</p>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="card" onclick="showToast('Coming soon!')">
+          <div class="card-img-placeholder">🚿</div>
+          <div class="card-body">
+            <div class="card-badges">
+              <span class="badge badge-time">⏱️ 20 min</span>
+              <span class="badge badge-cost">💰 $12</span>
+              <span class="badge badge-skill">🔧 Intermediate</span>
+            </div>
+            <h3>Fix a Running Toilet – Stop Wasting Water</h3>
+            <p>That phantom flush is costing you $200/year. Five parts, fifteen minutes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool of the Week -->
+    <section class="section">
+      <div class="section-header">
+        <h2>Tool of the Week</h2>
+        <a href="#">Archive →</a>
+      </div>
+      <div class="tool-callout">
+        <div class="tool-emoji">🔩</div>
+        <div class="tool-content">
+          <div class="tool-label">★ This Week's Pick</div>
+          <h3>Why every home needs this $12 tool</h3>
+          <p>The zip-it drain snake. Ugly, cheap, wildly effective. It pulls out the kind of hair clog that would make a plumber charge you $150 to snake the same drain. You do it in two minutes.</p>
+          <a class="btn btn-primary" onclick="navigate('article')" href="#">See it in action →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Instagram Row -->
+    <section class="section">
+      <div class="section-header">
+        <h2>From the Feed</h2>
+        <a href="https://instagram.com/stint.diy" target="_blank">@stint.diy →</a>
+      </div>
+      <div class="insta-row">
+        <div class="insta-item">🚰<div class="insta-overlay">♥ 847</div></div>
+        <div class="insta-item">🔧<div class="insta-overlay">♥ 1.2k</div></div>
+        <div class="insta-item">🏠<div class="insta-overlay">♥ 623</div></div>
+        <div class="insta-item">🪛<div class="insta-overlay">♥ 934</div></div>
+        <div class="insta-item">🪟<div class="insta-overlay">♥ 741</div></div>
+      </div>
+    </section>
+
+  </div><!-- /container -->
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <span class="footer-logo">ST<span>I</span>NT</span>
+          <p class="footer-tagline">Real fixes for real homes.<br>No influencer nonsense.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#" onclick="navigate('home')">Projects</a></li>
+            <li><a href="#" onclick="navigate('home')">Repairs</a></li>
+            <li><a href="#" onclick="navigate('home')">Tool Reviews</a></li>
+            <li><a href="#" onclick="navigate('home')">Guides</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#" onclick="navigate('about')">About</a></li>
+            <li><a href="#" onclick="navigate('contact')">Contact</a></li>
+            <li><a href="#" onclick="navigate('safety')">Safety</a></li>
+            <li><a href="#" onclick="navigate('disclaimer')">Disclaimer</a></li>
+            <li><a href="#" onclick="navigate('privacy')">Privacy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>One DIY tip every Sunday</h4>
+          <div class="email-form">
+            <p>No spam. No affiliate nonsense. Just one thing you can fix this weekend.</p>
+            <div class="email-input-row">
+              <input type="email" placeholder="your@email.com" id="footerEmail">
+              <button onclick="subscribeEmail()">Join</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 STINT. Built by people who've broken things.</span>
+        <div style="display:flex;gap:16px;flex-wrap:wrap">
+          <a href="#" onclick="navigate('disclaimer')">Disclaimer</a>
+          <a href="#" onclick="navigate('privacy')">Privacy</a>
+          <a href="#" onclick="navigate('safety')">Safety</a>
+          <a href="#" onclick="navigate('contact')">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /page-home -->
+
+
+<!-- ═══════════════════ ARTICLE PAGE ════════════════════ -->
+<div class="page" id="page-article">
+  <div class="article-layout">
+
+    <!-- TOC (left) -->
+    <aside class="toc">
+      <div class="toc-label">Contents</div>
+      <ul>
+        <li><a href="#tools-section" onclick="scrollTo_('#tools-section')">Tools & Materials</a></li>
+        <li><a href="#step-1" onclick="scrollTo_('#step-1')">Step 1 – Clear & Prep</a></li>
+        <li><a href="#step-2" onclick="scrollTo_('#step-2')">Step 2 – Remove Stopper</a></li>
+        <li><a href="#step-3" onclick="scrollTo_('#step-3')">Step 3 – Zip-it Tool</a></li>
+        <li><a href="#step-4" onclick="scrollTo_('#step-4')">Step 4 – Boiling Water</a></li>
+        <li><a href="#step-5" onclick="scrollTo_('#step-5')">Step 5 – Plunge if Needed</a></li>
+        <li><a href="#mistakes-section" onclick="scrollTo_('#mistakes-section')">Common Mistakes</a></li>
+      </ul>
+      <div style="margin-top:20px">
+        <div class="toc-label">Progress</div>
+        <div class="progress-bar"><div class="progress-fill" id="articleProgress"></div></div>
+        <small id="progressLabel" style="color:var(--text-2);font-size:0.75rem">0%</small>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <article class="article-content">
+      <div style="position:relative">
+        <a class="article-back" onclick="navigate('home')">
+          ← Back to projects
+        </a>
+        <button class="btn btn-outline print-btn" onclick="window.print()" style="font-size:0.8rem;padding:6px 12px">
+          🖨️ Print
+        </button>
+      </div>
+
+      <div class="article-badges">
+        <span class="badge badge-time">⏱️ 10 min</span>
+        <span class="badge badge-cost">💰 $4</span>
+        <span class="badge badge-skill">🌱 Beginner</span>
+      </div>
+
+      <h1>Unclog a Sink – No Chemicals</h1>
+
+      <div class="article-meta">
+        <span>By STINT Editors</span>
+        <span class="dot"></span>
+        <span>Updated Jan 2025</span>
+        <span class="dot"></span>
+        <span>5 min read</span>
+      </div>
+
+      <div class="article-hero-img">🚰</div>
+
+      <p>Your bathroom sink is draining like it's tired of you. The water pools, you wait, it eventually goes down. Annoying. Before you reach for Drano — stop. Chemical drain cleaners work once, eat your pipes over time, and create a splash hazard if you need to plunge afterward. This method costs $4, takes 10 minutes, and won't corrode your P-trap.</p>
+
+      <!-- Tools & Materials -->
+      <div class="tools-materials" id="tools-section">
+        <h3>🔧 Tools & Materials</h3>
+        <div class="tools-grid">
+          <div class="tool-item" id="tool-0" onclick="checkTool(0)">
+            <div class="tool-check" id="check-0"></div>
+            <span>Cup-style plunger (not flange)</span>
+          </div>
+          <div class="tool-item" id="tool-1" onclick="checkTool(1)">
+            <div class="tool-check" id="check-1"></div>
+            <span>Zip-it drain snake (~$4)</span>
+          </div>
+          <div class="tool-item" id="tool-2" onclick="checkTool(2)">
+            <div class="tool-check" id="check-2"></div>
+            <span>Bucket or large bowl</span>
+          </div>
+          <div class="tool-item" id="tool-3" onclick="checkTool(3)">
+            <div class="tool-check" id="check-3"></div>
+            <span>Old towel or rags</span>
+          </div>
+          <div class="tool-item" id="tool-4" onclick="checkTool(4)">
+            <div class="tool-check" id="check-4"></div>
+            <span>Kettle or pot (for boiling water)</span>
+          </div>
+          <div class="tool-item" id="tool-5" onclick="checkTool(5)">
+            <div class="tool-check" id="check-5"></div>
+            <span>Rubber gloves (optional, smart)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Steps -->
+      <div class="step" id="step-1">
+        <div class="step-number-row">
+          <div class="step-num">1</div>
+          <h3>Clear the area and place your bucket</h3>
+        </div>
+        <p>Open the cabinet under the sink and move everything out. Lay your towel down. Place the bucket directly under the P-trap — that curved pipe section. You may not need it, but if the clog is in the trap, you will. Takes 60 seconds. Worth it.</p>
+      </div>
+
+      <div class="step" id="step-2">
+        <div class="step-number-row">
+          <div class="step-num">2</div>
+          <h3>Remove the drain stopper</h3>
+        </div>
+        <p>Most bathroom sinks have a pop-up stopper connected to a pivot rod. Lift it straight up — it usually just pulls out. If it has a pivot rod (a horizontal rod connected beneath the sink to the drain pipe), unscrew the retaining nut by hand and slide the rod out. Set the stopper aside. You're about to see what's living in your drain.</p>
+      </div>
+
+      <div class="step" id="step-3">
+        <div class="step-number-row">
+          <div class="step-num">3</div>
+          <h3>Run the zip-it tool</h3>
+        </div>
+        <p>Insert the zip-it (a long plastic stick with backward-facing barbs) into the drain. Push it down slowly, then pull it back up. Rotate as you go. You're fishing for a hair clog. Do this 3 times minimum. The amount of material that comes out will surprise you. Dispose of it in the trash — not back down the drain.</p>
+
+        <div class="video-placeholder" onclick="showToast('Video coming soon!')">
+          <div class="video-play">
+            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <span style="font-size:0.85rem;color:var(--text-2)">Watch: Using the zip-it tool (2 min)</span>
+        </div>
+      </div>
+
+      <!-- In-content ad (after step 4 — compliant with rules) -->
+      <!-- This ad appears well after Tools & Materials section, not between steps 1-3 -->
+
+      <div class="step" id="step-4">
+        <div class="step-number-row">
+          <div class="step-num">4</div>
+          <h3>Boiling water flush</h3>
+        </div>
+        <p>Boil a full kettle. Pour it directly down the drain in two or three slow pours, waiting 30 seconds between each. Hot water dissolves soap buildup that the zip-it left behind. Run the faucet and watch. If the drain runs fast and clean — you're done.</p>
+      </div>
+
+      <!-- Ad unit after step 4 (compliant) -->
+      <div class="ad-in-content">Advertisement</div>
+
+      <div class="step" id="step-5">
+        <div class="step-number-row">
+          <div class="step-num">5</div>
+          <h3>Still clogged? Plunge with a wet towel seal</h3>
+        </div>
+        <p>Wet a cloth and press it firmly into the overflow hole on the sink (that small hole near the top of the basin). This creates a seal so suction goes down, not back through the overflow. Place your cup plunger over the drain, make sure there's an inch of water in the basin, and plunge 10 times with firm strokes. Check the drain. Repeat once more if needed.</p>
+      </div>
+
+      <!-- Warning -->
+      <div class="warning-box">
+        <span class="warn-icon">⚠️</span>
+        <div>
+          <strong>Important: Never mix chemicals and plunging.</strong>
+          <p>If you've already poured any chemical drain cleaner, do not plunge. The splashback contains caustic material that can seriously burn your eyes and skin. Wait 30 minutes, flush with water, then plunge if needed.</p>
+        </div>
+      </div>
+
+      <!-- Common Mistakes -->
+      <div class="mistakes-box" id="mistakes-section">
+        <h4>Common Mistakes</h4>
+        <ul>
+          <li>Using a flange plunger (the toilet-style one with a rubber flap inside). Wrong shape for a flat sink drain — you'll get no suction.</li>
+          <li>Skipping the overflow hole seal. Without it, you're plunging air out the top of the sink, not into the clog.</li>
+          <li>Pouring boiling water into PVC pipe with chemical residue. PVC softens above 140°F and chemicals can activate unpredictably.</li>
+          <li>Running the zip-it too fast. Slow rotations pull more debris. Speed it up and the barbs skip past the clog.</li>
+        </ul>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Related Posts -->
+      <div class="related-posts">
+        <h2>More Bathroom Fixes</h2>
+        <div class="related-grid">
+          <div class="card" onclick="showToast('Coming soon!')">
+            <div class="card-img-placeholder" style="height:130px;font-size:2rem">🚿</div>
+            <div class="card-body">
+              <div class="card-badges">
+                <span class="badge badge-time">⏱️ 20 min</span>
+                <span class="badge badge-cost">💰 $12</span>
+              </div>
+              <h3>Fix a Running Toilet</h3>
+            </div>
+          </div>
+          <div class="card" onclick="showToast('Coming soon!')">
+            <div class="card-img-placeholder" style="height:130px;font-size:2rem">🔧</div>
+            <div class="card-body">
+              <div class="card-badges">
+                <span class="badge badge-time">⏱️ 15 min</span>
+                <span class="badge badge-cost">💰 $6</span>
+              </div>
+              <h3>Silence a Squeaky Faucet Handle</h3>
+            </div>
+          </div>
+          <div class="card" onclick="showToast('Coming soon!')">
+            <div class="card-img-placeholder" style="height:130px;font-size:2rem">🪥</div>
+            <div class="card-body">
+              <div class="card-badges">
+                <span class="badge badge-time">⏱️ 30 min</span>
+                <span class="badge badge-cost">💰 $9</span>
+              </div>
+              <h3>Re-caulk a Bathtub the Right Way</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </article><!-- /article-content -->
+
+    <!-- Sidebar (right) -->
+    <aside class="article-sidebar">
+      <div class="sidebar-widget">
+        <h4>Quick Summary</h4>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;justify-content:space-between;font-size:0.875rem">
+            <span style="color:var(--text-2)">Time</span>
+            <strong>10 min</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:0.875rem">
+            <span style="color:var(--text-2)">Cost</span>
+            <strong>$4</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:0.875rem">
+            <span style="color:var(--text-2)">Skill</span>
+            <strong>Beginner</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:0.875rem">
+            <span style="color:var(--text-2)">Tools needed</span>
+            <strong>2</strong>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-widget">
+        <h4>Save this guide</h4>
+        <button class="btn btn-outline" style="width:100%;justify-content:center" onclick="showToast('Saved to your list!')">🔖 Save for later</button>
+      </div>
+      <div class="sidebar-ad">Ad Unit 300×250</div>
+    </aside>
+
+  </div><!-- /article-layout -->
+</div><!-- /page-article -->
+
+
+<!-- ═══════════════════ ABOUT PAGE ════════════════════════ -->
+<div class="page" id="page-about">
+  <div class="simple-page">
+    <div class="about-face">👷</div>
+    <h1>About STINT</h1>
+    <p class="page-meta">A real face photo would go here. But you get the idea.</p>
+
+    <p>STINT started because home repair advice online is broken. Most guides are either: (a) a YouTube video that's 14 minutes long and contains 90 seconds of useful information, or (b) a blog post stuffed with so many affiliate links and stock photos of smiling people in tool belts that you can't find the actual steps.</p>
+
+    <h2>We broke things so you don't have to</h2>
+    <p>Every fix on this site has been attempted, failed at, and tried again in a real house. We describe what actually happened, not what the tool box says should happen.</p>
+
+    <h2>What we believe</h2>
+    <p>You don't need a contractor for most home repairs. You need clear instructions, the right $12 tool, and honest information about when something is over your head.</p>
+
+    <h2>When to call a professional</h2>
+    <p>Anything involving your main electrical panel, load-bearing walls, or gas lines: call a licensed professional. We'll tell you exactly when in each guide.</p>
+
+    <div style="margin-top:32px">
+      <a class="btn btn-primary" onclick="navigate('contact')" href="#">Get in touch →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ DISCLAIMER PAGE ══════════════════ -->
+<div class="page" id="page-disclaimer">
+  <div class="simple-page">
+    <h1>Disclaimer</h1>
+    <p class="page-meta">Last updated January 2025</p>
+
+    <div class="warning-box" style="margin-bottom:32px">
+      <span class="warn-icon">⚠️</span>
+      <div>
+        <strong>Read this before attempting any repair.</strong>
+        <p>DIY repairs carry real risk. Some tasks described on this site involve electricity, plumbing, structural elements, or sharp tools. Mistakes can cause injury, property damage, or death.</p>
+      </div>
+    </div>
+
+    <h2>Electrical work</h2>
+    <p>Unless explicitly labeled as safe for DIY, do not attempt work on your main panel, service entrance, or any wiring that is not clearly de-energized and locked out. In many jurisdictions, unpermitted electrical work voids your homeowner's insurance. Hire a licensed electrician for any panel work, new circuits, or anything you are not certain about.</p>
+
+    <h2>Structural work</h2>
+    <p>Do not remove walls, cut joists, modify rafters, or alter any load-bearing element without a structural engineer's assessment. This includes "popcorn ceiling" removal that may contain asbestos in homes built before 1980.</p>
+
+    <h2>Plumbing</h2>
+    <p>Drain cleaning and fixture replacement are generally safe DIY tasks. Supply line work, main shutoff valve replacement, and anything involving gas lines is not. If you smell gas, leave the house and call your utility company.</p>
+
+    <h2>No professional relationship</h2>
+    <p>Nothing on this site constitutes professional advice. STINT is not a licensed contractor, electrician, plumber, or structural engineer. All content is for educational purposes only. You assume all risk.</p>
+
+    <h2>Accuracy</h2>
+    <p>We do our best to keep guides accurate, but building codes vary by municipality, materials change, and your specific situation may differ. Verify local codes before starting any permitted project.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════ CONTACT PAGE ════════════════════ -->
+<div class="page" id="page-contact">
+  <div class="simple-page">
+    <h1>Contact</h1>
+    <p class="page-meta">We actually read these. Response time: 2–3 business days.</p>
+    <p>For guide corrections, partnership inquiries, or to submit a repair you want us to cover — use the form below or email <a href="mailto:hello@stint.com">hello@stint.com</a>.</p>
+
+    <div class="contact-form">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label>Subject</label>
+        <select>
+          <option>Guide correction</option>
+          <option>Suggest a repair</option>
+          <option>Partnership</option>
+          <option>Press inquiry</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea rows="5" placeholder="What's on your mind?"></textarea>
+      </div>
+      <button class="btn btn-primary" onclick="showToast('Message sent! We\'ll be in touch.')" style="align-self:flex-start">Send message →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ PRIVACY PAGE ════════════════════ -->
+<div class="page" id="page-privacy">
+  <div class="simple-page">
+    <h1>Privacy Policy</h1>
+    <p class="page-meta">Last updated January 2025</p>
+
+    <h2>What we collect</h2>
+    <p>If you sign up for our email list, we store your email address using a third-party email service provider. We use Google Analytics to understand site traffic in aggregate — no personally identifiable data is collected beyond what Google Analytics provides.</p>
+
+    <h2>What we don't do</h2>
+    <p>We don't sell your data. We don't use your data for advertising profiles. We don't send more than one email per week. We don't have a data broker relationship with anyone.</p>
+
+    <h2>Cookies</h2>
+    <p>We use cookies for Google Analytics and to remember your dark mode preference. That's it.</p>
+
+    <h2>Your rights</h2>
+    <p>You can unsubscribe from our email list at any time via the link in any email. To request deletion of your data, email <a href="mailto:hello@stint.com">hello@stint.com</a> with the subject "Data deletion request."</p>
+
+    <h2>Contact</h2>
+    <p>Privacy questions: <a href="mailto:hello@stint.com">hello@stint.com</a></p>
+  </div>
+</div>
+
+<!-- ═══════════════════ SAFETY PAGE ════════════════════ -->
+<div class="page" id="page-safety">
+  <div class="simple-page">
+    <h1>Safety Basics</h1>
+    <p class="page-meta">Read before your first project.</p>
+
+    <p>Most DIY injuries are preventable. The ones that aren't are usually caused by skipping these basics.</p>
+
+    <div class="safety-card">
+      <div class="safety-icon">👁️</div>
+      <div>
+        <h3>Eye protection</h3>
+        <p>Wear safety glasses any time you're drilling, cutting, grinding, or working overhead. One fragment at the wrong angle ends your vision. Glasses are $8 at any hardware store.</p>
+      </div>
+    </div>
+
+    <div class="safety-card">
+      <div class="safety-icon">⚡</div>
+      <div>
+        <h3>Electrical: always de-energize and verify</h3>
+        <p>Turn off the breaker. Then use a non-contact voltage tester to confirm the wire is dead before you touch it. Breakers mislabel. The tester costs $15 and is non-negotiable.</p>
+      </div>
+    </div>
+
+    <div class="safety-card">
+      <div class="safety-icon">🔩</div>
+      <div>
+        <h3>Secure your work surface</h3>
+        <p>Clamp materials before cutting. Use sawhorses. Never hold a piece with your hand while cutting toward it. Your fingers are not a clamp.</p>
+      </div>
+    </div>
+
+    <div class="safety-card">
+      <div class="safety-icon">🌬️</div>
+      <div>
+        <h3>Ventilation for chemicals</h3>
+        <p>Open windows. Use fans. If a product says "use in a well-ventilated area," that means it will make you sick if you don't. Especially: primers, adhesives, spray paint, and anything with "VOC" in the label.</p>
+      </div>
+    </div>
+
+    <div class="safety-card">
+      <div class="safety-icon">🧯</div>
+      <div>
+        <h3>Fire safety for rags</h3>
+        <p>Oil-based stain and some finishes cause spontaneous combustion in bunched-up rags. Spread them flat to dry outdoors, then dispose of them in a metal container with a lid. This is not hypothetical — it causes house fires.</p>
+      </div>
+    </div>
+
+    <div class="safety-card">
+      <div class="safety-icon">🏠</div>
+      <div>
+        <h3>Know your limits</h3>
+        <p>If a task requires a permit in your area, that permit exists for safety reasons. Pull the permit. If something feels structurally uncertain or electrically complex, hire someone. Calling a professional is not failure — it's correct risk management.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:32px">
+      <a class="btn btn-outline" onclick="navigate('disclaimer')" href="#">Read our full disclaimer →</a>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// ─── NAVIGATION ──────────────────────────────────────────────────────────────
+function navigate(page) {
+  // Hide all pages
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  // Show target page
+  const target = document.getElementById('page-' + page);
+  if (target) {
+    target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  // Update reading progress visibility
+  updateReadingProgress();
+}
+
+// ─── DARK MODE ───────────────────────────────────────────────────────────────
+function toggleDark() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('sunIcon').style.display = isDark ? 'block' : 'none';
+  document.getElementById('moonIcon').style.display = isDark ? 'none' : 'block';
+  localStorage.setItem('stint-theme', isDark ? 'light' : 'dark');
+}
+
+// Apply saved theme
+(function() {
+  const saved = localStorage.getItem('stint-theme');
+  if (saved === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('sunIcon').style.display = 'none';
+      document.getElementById('moonIcon').style.display = 'block';
+    });
+  }
+})();
+
+// ─── MOBILE DRAWER ───────────────────────────────────────────────────────────
+function openDrawer() {
+  document.getElementById('navDrawer').classList.add('open');
+  document.getElementById('drawerOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeDrawer() {
+  document.getElementById('navDrawer').classList.remove('open');
+  document.getElementById('drawerOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ─── SEARCH ──────────────────────────────────────────────────────────────────
+function openSearch() {
+  const overlay = document.getElementById('searchOverlay');
+  overlay.classList.add('open');
+  setTimeout(() => document.getElementById('searchInput').focus(), 100);
+}
+function closeSearch(e) {
+  if (e.target === document.getElementById('searchOverlay')) {
+    document.getElementById('searchOverlay').classList.remove('open');
+  }
+}
+function handleSearch(e) {
+  if (e.key === 'Escape') {
+    document.getElementById('searchOverlay').classList.remove('open');
+  }
+  if (e.key === 'Enter') {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    document.getElementById('searchOverlay').classList.remove('open');
+    if (q.includes('sink') || q.includes('drain') || q.includes('clog')) {
+      navigate('article');
+    } else {
+      showToast('No results for "' + document.getElementById('searchInput').value + '" – coming soon!');
+    }
+  }
+}
+
+// ─── TOAST ───────────────────────────────────────────────────────────────────
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ─── CATEGORY CHIPS ──────────────────────────────────────────────────────────
+function toggleChip(el) {
+  el.classList.toggle('active');
+}
+
+// ─── TOOL CHECKLIST ──────────────────────────────────────────────────────────
+function checkTool(idx) {
+  const check = document.getElementById('check-' + idx);
+  const item  = document.getElementById('tool-' + idx);
+  check.classList.toggle('checked');
+  item.classList.toggle('checked-item');
+}
+
+// ─── SCROLL TO SECTION ───────────────────────────────────────────────────────
+function scrollTo_(selector) {
+  const el = document.querySelector(selector);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  return false;
+}
+
+// ─── READING PROGRESS & TOC HIGHLIGHT ────────────────────────────────────────
+function updateReadingProgress() {
+  const isArticle = document.getElementById('page-article').classList.contains('active');
+  const bar = document.getElementById('readingBar');
+  document.getElementById('readingProgress').style.display = isArticle ? 'block' : 'none';
+}
+
+window.addEventListener('scroll', () => {
+  if (!document.getElementById('page-article').classList.contains('active')) return;
+
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0;
+
+  document.getElementById('readingBar').style.width = pct + '%';
+  document.getElementById('articleProgress').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = Math.round(pct) + '%';
+
+  // TOC highlight
+  const steps = ['tools-section','step-1','step-2','step-3','step-4','step-5','mistakes-section'];
+  const tocLinks = document.querySelectorAll('.toc ul a');
+  let current = 0;
+  steps.forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top < 120) current = i;
+  });
+  tocLinks.forEach((a, i) => {
+    a.classList.toggle('active', i === current);
+  });
+});
+
+// ─── EMAIL SUBSCRIBE ─────────────────────────────────────────────────────────
+function subscribeEmail() {
+  const email = document.getElementById('footerEmail').value;
+  if (!email || !email.includes('@')) {
+    showToast('Enter a valid email address');
+    return;
+  }
+  document.getElementById('footerEmail').value = '';
+  showToast('🎉 You\'re in! First tip lands Sunday.');
+}
+
+// ─── KEYBOARD SHORTCUTS ──────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    openSearch();
+  }
+  if (e.key === 'Escape') {
+    document.getElementById('searchOverlay').classList.remove('open');
+    closeDrawer();
+  }
+});
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+updateReadingProgress();
+</script>
+</body>
+</html>
